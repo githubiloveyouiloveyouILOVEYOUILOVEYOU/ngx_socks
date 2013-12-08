@@ -1,0 +1,3 @@
+ngx_addon_name=ngx_sock
+CORE_MODULES="$CORE_MODULES ngx_sock_module"
+NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_sock.c"
