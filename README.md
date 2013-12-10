@@ -15,5 +15,6 @@ support simple socks5 without user identification.
   </code></pre>
 
 ####TODO:
-
+1. Support user identification with user name and password
+2. Support multi-port configuration as configured like 'server' in http module
   
