@@ -1,12 +1,11 @@
-ngx_sock
-========
+#ngx_socks
 
 A nginx module that can offer sock5 service.
 
-INSTALL
+##INSTALL
   Configure with an extra option '--add-module=/path/to/ngx_sock/'
   
-CONFIGURATION
+##CONFIGURATION
   add these to your nginx.conf
   sock{
     port 8080; # whatever port you want
