@@ -1,11 +1,11 @@
-#include "ngx_sock.h"
+#include "ngx_socks.h"
 
-static ngx_command_t ngx_sock_commands[] = {
+static ngx_command_t ngx_socks_commands[] = {
 	
 	{
 		ngx_string("sock"),
 		NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS	,
-		ngx_sock_block,
+		ngx_socks_block,
 		0,
 		0,
 		NULL,
@@ -13,8 +13,8 @@ static ngx_command_t ngx_sock_commands[] = {
 	
 	{
 		ngx_string("port"),
-		NGX_DIRECT_CONF|NGX_SOCK_CONF|NGX_CONF_TAKE1,
-		ngx_sock_port,
+		NGX_DIRECT_CONF|NGX_SOCKS_CONF|NGX_CONF_TAKE1,
+		ngx_socks_port,
 		0,
 		0,
 		NULL,
@@ -23,16 +23,16 @@ static ngx_command_t ngx_sock_commands[] = {
 	ngx_null_command,
 };
 
-static ngx_sock_module_t ngx_sock_module_ctx = {
+static ngx_socks_module_t ngx_socks_module_ctx = {
 	ngx_string("sock"),
-	ngx_sock_module_create_conf,
-	ngx_sock_module_init_conf,
+	ngx_socks_module_create_conf,
+	ngx_socks_module_init_conf,
 };
 
-ngx_module_t ngx_sock_module = {
+ngx_module_t ngx_socks_module = {
 	NGX_MODULE_V1,
-	&ngx_sock_module_ctx,
-	ngx_sock_commands,
+	&ngx_socks_module_ctx,
+	ngx_socks_commands,
 	NGX_CORE_MODULE,
 	NULL,
 	NULL,
@@ -44,10 +44,10 @@ ngx_module_t ngx_sock_module = {
 	NGX_MODULE_V1_PADDING,
 };
 
-void *ngx_sock_module_create_conf(ngx_cycle_t *cycle){
+void *ngx_socks_module_create_conf(ngx_cycle_t *cycle){
 	
-	ngx_sock_conf_t *scf;
-	scf = ngx_pcalloc(cycle->pool, sizeof(ngx_sock_conf_t));
+	ngx_socks_conf_t *scf;
+	scf = ngx_pcalloc(cycle->pool, sizeof(ngx_socks_conf_t));
 	if(scf == NULL){
 		return NULL;
 	}
@@ -56,9 +56,9 @@ void *ngx_sock_module_create_conf(ngx_cycle_t *cycle){
 }
 
 
-char *ngx_sock_module_init_conf(ngx_cycle_t *cycle, void *conf){
+char *ngx_socks_module_init_conf(ngx_cycle_t *cycle, void *conf){
 	
-	ngx_sock_conf_t *scf = conf;
+	ngx_socks_conf_t *scf = conf;
 	scf->addr.sin_family = AF_INET;
 	scf->addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	scf->addr.sin_port = htons(1080);
@@ -66,12 +66,12 @@ char *ngx_sock_module_init_conf(ngx_cycle_t *cycle, void *conf){
 	return NGX_CONF_OK;
 }
 
-char *ngx_sock_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
+char *ngx_socks_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
 	char *rv;
 	ngx_conf_t pcf;
 	pcf = *cf;
-	cf->cmd_type = NGX_SOCK_CONF;
+	cf->cmd_type = NGX_SOCKS_CONF;
 
 	rv = ngx_conf_parse(cf, NULL);
 
@@ -83,9 +83,9 @@ char *ngx_sock_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 	return NGX_CONF_OK;
 }
 
-char *ngx_sock_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
+char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
-	ngx_sock_conf_t *scf = conf;
+	ngx_socks_conf_t *scf = conf;
 	ngx_str_t *value;
 
 	value = cf->args->elts;
