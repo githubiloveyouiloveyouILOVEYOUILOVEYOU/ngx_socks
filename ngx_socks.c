@@ -1,3 +1,4 @@
+#include <ngx_conf_file.h>
 #include "ngx_socks.h"
 
 static ngx_command_t ngx_socks_commands[] = {
@@ -17,6 +18,24 @@ static ngx_command_t ngx_socks_commands[] = {
 		ngx_socks_port,
 		0,
 		0,
+		NULL,
+	},
+	
+	{
+		ngx_string("timeout"),
+		NGX_DIRECT_CONF|NGX_SOCKS_CONF|NGX_CONF_TAKE1,
+		ngx_conf_set_num_slot,
+		0,
+		offsetof(ngx_socks_conf_t, timeout),
+		NULL,
+	},
+
+	{
+		ngx_string("proxy_timeout"),
+		NGX_DIRECT_CONF|NGX_SOCKS_CONF|NGX_CONF_TAKE1,
+		ngx_conf_set_num_slot,
+		0,
+		offsetof(ngx_socks_conf_t, proxy_timeout),
 		NULL,
 	},
 
@@ -93,4 +112,5 @@ char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
 	return NGX_CONF_OK;
 }
+
 

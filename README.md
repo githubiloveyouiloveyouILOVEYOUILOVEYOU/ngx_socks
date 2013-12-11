@@ -11,6 +11,8 @@ support simple socks5 without user identification.
   <pre><code>
   sock{
     port 8080; # whatever port you want
+    timeout 10; #timeout between nginx and clients
+    proxy_timetout;  #timeout between nginx and other proxy servers.
   }
   </code></pre>
 
