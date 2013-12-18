@@ -4,7 +4,7 @@
 static ngx_command_t ngx_socks_commands[] = {
 	
 	{
-		ngx_string("sock"),
+		ngx_string("socks"),
 		NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_BLOCK|NGX_CONF_NOARGS	,
 		ngx_socks_block,
 		0,
@@ -43,7 +43,7 @@ static ngx_command_t ngx_socks_commands[] = {
 };
 
 static ngx_socks_module_t ngx_socks_module_ctx = {
-	ngx_string("sock"),
+	ngx_string("socks"),
 	ngx_socks_module_create_conf,
 	ngx_socks_module_init_conf,
 };
@@ -112,5 +112,7 @@ char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
 	return NGX_CONF_OK;
 }
+
+
 
 

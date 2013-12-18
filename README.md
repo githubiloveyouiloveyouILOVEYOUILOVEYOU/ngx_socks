@@ -9,7 +9,7 @@ support simple socks5 without user identification.
 ####CONFIGURATION
   add these to your nginx.conf
   <pre><code>
-  sock{
+  socks{
     port 8080; # whatever port you want
     timeout 10; #timeout between nginx and clients
     proxy_timetout;  #timeout between nginx and other proxy servers.
@@ -17,6 +17,7 @@ support simple socks5 without user identification.
   </code></pre>
 
 ####TODO:
-1. Support user identification with user name and password
-2. Support multi-port configuration as configured like 'server' in http module
+1. BIND support 
+2. Support user identification with user name and password
+3. Support multi-port configuration as configured like 'server' in http module
   
