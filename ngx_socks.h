@@ -15,7 +15,7 @@ typedef enum{
 	ngx_socks_start = 0,
 	ngx_socks_authorized,
 	ngx_socks_upstream,
-};
+}ngx_socks_state;
 
 typedef struct{
 	struct sockaddr_in addr;
@@ -46,18 +46,18 @@ typedef struct{
 typedef void (*ngx_socks_init_session_pt)(ngx_session_t *, ngx_connection_t *);
 typedef void (*ngx_socks_init_protocal_pt)(ngx_event_t *);
 typedef ngx_int_t (*ngx_socks_parse_command)(ngx_session_t *);
-typedef void ngx_socks_auth_state(ngx_event_t *);
+typedef void (*ngx_socks_auth_state)(ngx_event_t *);
 
 static char *ngx_socks_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 static char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf); 
 
 static void *ngx_socks_module_create_conf(ngx_cycle_t *cycle);
-static char * ngx_socks_module_init_conf(ngx_cycle_t *cycle, void *conf);
+static char *ngx_socks_module_init_conf(ngx_cycle_t *cycle, void *conf);
 
 void ngx_socks_init_connection(ngx_connection_t *c);
 void ngx_socks_init_session(ngx_session_t *s, ngx_connection_t *c);
 void ngx_socks_init_protocal(ngx_event_t *rev);
-ngx_int_t ngx_socks_parse_command(ngx_session_t *s, );
+ngx_int_t ngx_socks_parse_command(ngx_session_t *s);
 void ngx_socks_auth_state(ngx_event_t *rev);
 void ngx_socks_proxy_init(ngx_session_t *s);
 void ngx_socks_proxy_read_handler();
