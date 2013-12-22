@@ -89,9 +89,12 @@ char *ngx_socks_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
 	char *rv;
 	ngx_conf_t pcf;
+    ngx_socks_conf_t *scf;
+    ngx_listening_t *ls;
+
+    scf = conf;
 	pcf = *cf;
 	cf->cmd_type = NGX_SOCKS_CONF;
-
 	rv = ngx_conf_parse(cf, NULL);
 
 	*cf = pcf;
@@ -99,6 +102,12 @@ char *ngx_socks_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 	if(rv != NGX_CONF_OK)
 		return rv;	
 
+    /* Create listening */
+    ls = ngx_create_listening(cf, (struct sockaddr *)scf->addr,
+                              sizeof(struct sockaddr_in));
+    if(ls == NULL)
+        return ;
+    
 	return NGX_CONF_OK;
 }
 

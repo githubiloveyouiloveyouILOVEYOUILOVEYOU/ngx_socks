@@ -62,5 +62,4 @@ void ngx_socks_auth_state(ngx_event_t *rev);
 void ngx_socks_proxy_init(ngx_session_t *s);
 void ngx_socks_proxy_read_handler();
 
-
 #endif
