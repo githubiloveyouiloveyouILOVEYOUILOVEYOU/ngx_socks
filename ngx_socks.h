@@ -20,8 +20,8 @@ typedef enum{
 
 typedef struct{
 	struct sockaddr_in addr;
-	int timeout;
-	int proxy_timeout;
+	ngx_int_t timeout;
+	ngx_int_t proxy_timeout;
 }ngx_socks_conf_t;
 
 typedef struct{
@@ -51,7 +51,7 @@ typedef void (*ngx_socks_auth_state)(ngx_event_t *);
 static char *ngx_socks_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 static char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf); 
 
-static void *ngx_socks_module_create_conf(ngx_cycle_t *cycle);
+static void *ngx_socks_core_module_create_conf(ngx_cycle_t *cycle);
 static char *ngx_socks_module_init_conf(ngx_cycle_t *cycle, void *conf);
 
 void ngx_socks_init_connection(ngx_connection_t *c);
