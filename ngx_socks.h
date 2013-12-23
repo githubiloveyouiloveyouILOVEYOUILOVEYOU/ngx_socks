@@ -21,6 +21,7 @@ typedef enum{
 typedef struct{
 	struct sockaddr_in addr;
 	ngx_int_t timeout;
+    ngx_int_t keepalive;
 	ngx_int_t proxy_timeout;
 }ngx_socks_conf_t;
 

@@ -34,7 +34,16 @@ static ngx_command_t ngx_socks_core_commands[] = {
 		offsetof(ngx_socks_conf_t, timeout),
 		NULL,
 	},
-
+    
+    {
+        ngx_string("keepalive"),
+        NGX_SOCKS_CONF|NGX_CONF_TAKE1,
+        ngx_conf_set_num_slot,
+        0,
+        offsetof(ngx_socks_conf_t, keepalive),
+        NULL,
+    },
+    
 	{
 		ngx_string("proxy_timeout"),
 		NGX_SOCKS_CONF|NGX_CONF_TAKE1,
@@ -113,6 +122,7 @@ void *ngx_socks_core_module_create_conf(ngx_cycle_t *cycle){
 	scf->addr.sin_port = htons(1080);
     scf->timeout = NGX_CONF_UNSET;
     scf->proxy_timeout = NGX_CONF_UNSET;
+    scf->keepalive = NGX_CONF_UNSET;
 
 	return scf;
 }
