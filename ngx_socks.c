@@ -229,16 +229,9 @@ char *ngx_socks_port(ngx_conf_t *cf, ngx_command_t *cmd, void *conf){
 
 void ngx_socks_init_connection(ngx_connection_t *c){
 
-    ngx_event_t *wev;
-    unsigned char buf[] = "hello world\n";
-    int n;
-
+    
     ngx_log_error(NGX_LOG_DEBUG, c->log, 0, "ngx_socks_init_connection");
-    wev = c->write;
-    if(wev->ready){
-        n = c->send(c, buf, sizeof(buf));
-        ngx_log_error(NGX_LOG_DEBUG, c->log, 0, "send %d bytes", n);
-    }
+    
 }
 
 
